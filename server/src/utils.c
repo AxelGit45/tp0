@@ -20,11 +20,11 @@ int iniciar_servidor(void)
 
 	// Creamos el socket de escucha del servidor
 
-	socket_servidor = socket(servinfo->ai_family, servinfo->ai_socktype, servinfo->ai_protocol);
+	socket_servidor = socket(servinfo->ai_family, servinfo->ai_socktype, servinfo->ai_protocol);// ta bien
 
 	// Asociamos el socket a un puerto
 
-	bind(socket_servidor,servinfo->ai_addr, servinfo->ai_addrlen);
+	bind(socket_servidor,servinfo->ai_addr, servinfo->ai_addrlen);// ta bien
 
 	// Escuchamos las conexiones entrantes
 
@@ -32,7 +32,7 @@ int iniciar_servidor(void)
 
 	freeaddrinfo(servinfo);
 	log_trace(logger, "Listo para escuchar a mi cliente");
-
+	
 	return socket_servidor;
 }
 
@@ -43,7 +43,7 @@ int esperar_cliente(int socket_servidor)
 
 	// Aceptamos un nuevo cliente
 
-	int socket_cliente = accept(socket_servidor,NULL, NULL);
+	int socket_cliente = accept(socket_servidor,NULL, NULL);// ta bien
 	log_info(logger, "Se conecto un cliente!");
 
 	return socket_cliente;
