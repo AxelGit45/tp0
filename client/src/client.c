@@ -16,7 +16,7 @@ int main(void)
 
 	/* ---------------- LOGGING ---------------- */
 	
-	log_create("/home/utnso/tp0/tp0.log", "tp0.log", true, LOG_LEVEL_INFO);
+	//log_create("/home/utnso/tp0/tp0.log", "tp0.log", true, LOG_LEVEL_INFO);
 	logger = iniciar_logger();
 
 	// Usando el logger creado previamente
@@ -28,7 +28,7 @@ int main(void)
 	
 	//---------------------- IMPORTANTE!!!!!!!!!!!!!!!
 	config = iniciar_config();
-	config = config_create("cliente.config");
+	//config = config_create("cliente.config");
 	//------------------------
 	// Usando el config creado previamente, leemos los valores del config y los 
 	// dejamos en las variables 'ip', 'puerto' y 'valor'
@@ -69,14 +69,14 @@ int main(void)
 
 t_log* iniciar_logger(void)
 {
-	t_log* nuevo_logger;
+	t_log* nuevo_logger = log_create("/home/utnso/tp0/tp0.log", "tp0.log", true, LOG_LEVEL_INFO);
 
 	return nuevo_logger;
 }
 
 t_config* iniciar_config(void)
 {
-	t_config* nuevo_config;
+	t_config* nuevo_config = config_create("cliente.config");
 
 	return nuevo_config;
 }
