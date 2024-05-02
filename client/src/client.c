@@ -96,7 +96,8 @@ void leer_consola(t_log* logger)
 		if (!leido) {
             break;
         }
-		printf("%s\n", leido);
+		//printf("%s\n", leido);
+		log_info(logger, leido);
 	}
 	
 	free(leido);
