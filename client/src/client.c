@@ -21,7 +21,7 @@ int main(void)
 
 	// Usando el logger creado previamente
 	// Escribi: "Hola! Soy un log"
-	log_info(logger, "Soy un log");
+	log_info(logger, "Soy un log");// ACA NO HAY PROBLEMA
 
 
 	/* ---------------- ARCHIVOS DE CONFIGURACION ---------------- */
@@ -38,8 +38,8 @@ int main(void)
 	puerto = config_get_string_value(config,"PUERTO");
 	valor = config_get_string_value(config,"CLAVE");
 	// Loggeamos el valor de config
-	log_info(logger, ip);
-	log_info(logger, puerto);
+	//log_info(logger, ip);
+	//log_info(logger, puerto);
 	log_info(logger, valor);
 
 
@@ -80,7 +80,7 @@ t_log* iniciar_logger(void)
 
 t_config* iniciar_config(void)
 {
-	t_config* nuevo_config = config_create("cliente.config");
+	t_config* nuevo_config = config_create("/home/utnso/tp0/client/cliente.config");
 
 	return nuevo_config;
 }
@@ -98,13 +98,17 @@ void leer_consola(t_log* logger)
 	{
 		leido = readline("> ");
 		if (!leido) {
-            break;
+            free(leido);
+			break;
+
         }
 		//printf("%s\n", leido);
 		log_info(logger, leido);
+		free(leido);
 	}
 	
 	free(leido);
+	
 	// ¡No te olvides de liberar las lineas antes de regresar!
 
 }
@@ -120,12 +124,13 @@ void paquete(int conexion)
 	{
 		leido = readline("> ");
 		if (!leido) {
+			free(leido);
             break;
         }
 		agregar_a_paquete(paquete,leido,strlen(leido)+1);
 	}
 	
-	free(leido);
+	//free(leido);
 	//agregar_a_paquete(paquete,leido,strlen(leido)+1);
 	enviar_paquete(paquete,conexion);
 	
