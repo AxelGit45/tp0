@@ -53,10 +53,7 @@ int main(void)
 
 	// Creamos una conexión hacia el servidor
 	conexion = crear_conexion(ip, puerto);
-	if (conexion !=0)
-	{
-		log_info(logger, "ERROR EN LA CONEXION");
-	}
+	
 	
 	// Enviamos al servidor el valor de CLAVE como mensaje
 	enviar_mensaje(valor, conexion);
@@ -73,7 +70,7 @@ int main(void)
 
 t_log* iniciar_logger(void)
 {
-	t_log* nuevo_logger = log_create("/home/utnso/tp0/tp0.log", "tp0.log", true, LOG_LEVEL_INFO);
+	t_log* nuevo_logger = log_create("/home/utnso/tp0/tp0.log", "tp0.log", 1, LOG_LEVEL_INFO);
 
 	return nuevo_logger;
 }
