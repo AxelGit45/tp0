@@ -53,7 +53,11 @@ int main(void)
 
 	// Creamos una conexión hacia el servidor
 	conexion = crear_conexion(ip, puerto);
-
+	if (conexion !=0)
+	{
+		log_info(logger, "ERROR EN LA CONEXION");
+	}
+	
 	// Enviamos al servidor el valor de CLAVE como mensaje
 	enviar_mensaje(valor, conexion);
 	// Armamos y enviamos el paquete
@@ -127,6 +131,7 @@ void paquete(int conexion)
 	
 	// ¡No te olvides de liberar las líneas y el paquete antes de regresar!
 	eliminar_paquete(paquete);
+	
 	free(leido);
 }
 
