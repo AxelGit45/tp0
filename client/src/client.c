@@ -1,4 +1,5 @@
 #include "client.h"
+#include <readline/readline.h>
 
 int main(void)
 {
@@ -25,6 +26,18 @@ int main(void)
 
 	config = iniciar_config();
 
+	//char *clave = config_get_string_value(config,"CLAVE");
+	//config_save_in_file(,"");
+	//log_info(logger, clave);
+	
+	valor = config_get_string_value(config,"CLAVE");
+	log_info(logger, "El valor de la clave es: %s", valor);
+
+	ip = config_get_string_value(config,"IP");
+	log_info(logger, "El valor de la IP es :%s", ip);
+	
+	puerto= config_get_string_value(config,"PUERTO");
+	log_info(logger, "El valor del PUERTO es:%s",puerto);
 	// Usando el config creado previamente, leemos los valores del config y los 
 	// dejamos en las variables 'ip', 'puerto' y 'valor'
 
@@ -62,7 +75,16 @@ t_log* iniciar_logger(void)
 
 t_config* iniciar_config(void)
 {
-	t_config* nuevo_config;
+	
+	t_config* nuevo_config = config_create("cliente.config");
+	
+	if (nuevo_config == NULL)
+	{
+		abort();
+	}
+
+	//char *clave = config_get_string_value(nuevo_config,"Hola soy la clave");
+	
 
 	return nuevo_config;
 }
@@ -74,11 +96,24 @@ void leer_consola(t_log* logger)
 	// La primera te la dejo de yapa
 	leido = readline("> ");
 
+	
 	// El resto, las vamos leyendo y logueando hasta recibir un string vacío
 
+	log_info(logger, leido);
 
+	while (strcmp(leido,"")!= 0)
+	{
+		log_info(logger, leido);
+
+		leido = readline("> ");
+		//log_info(logger, leido);
+		
+		//abort();
+	}
+	free(leido);
+	abort();
 	// ¡No te olvides de liberar las lineas antes de regresar!
-
+	//free(leido);
 }
 
 void paquete(int conexion)
@@ -99,4 +134,6 @@ void terminar_programa(int conexion, t_log* logger, t_config* config)
 	/* Y por ultimo, hay que liberar lo que utilizamos (conexion, log y config) 
 	  con las funciones de las commons y del TP mencionadas en el enunciado */
 	log_destroy(logger);
+	
+	config_destroy(config);
 }
