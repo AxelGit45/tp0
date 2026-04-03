@@ -99,19 +99,20 @@ void leer_consola(t_log* logger)
 	
 	// El resto, las vamos leyendo y logueando hasta recibir un string vacío
 
-	log_info(logger, leido);
+	//log_info(logger, leido);
 
 	while (strcmp(leido,"")!= 0)
 	{
+		free(leido);
+		leido = readline("> ");
 		log_info(logger, leido);
 
-		leido = readline("> ");
 		//log_info(logger, leido);
 		
 		//abort();
 	}
 	free(leido);
-	abort();
+	//abort();
 	// ¡No te olvides de liberar las lineas antes de regresar!
 	//free(leido);
 }
